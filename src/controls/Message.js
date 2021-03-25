@@ -14,6 +14,11 @@ const useStyles = makeStyles(() => ({
         margin: 10,
         width: 500
     },
+    listItemText: {
+        '& .MuiTypography-colorTextSecondary': {
+            color: '#FFFFFF99'
+        }
+    },
     right: {
         backgroundColor: '#3A71B7',
         borderRadius: 10,
@@ -45,6 +50,7 @@ const Message = ({ message, name }) => {
                 : classes.left}
         >
             <ListItemText
+                className={isSentByCurrentUser ? classes.listItemText : null}
                 primary={ReactEmoji.emojify(text)}
                 secondary={user}
             />
