@@ -5,11 +5,11 @@ jobs:
     steps:
       - checkout
       - run:
-        name: installing AWS CLI
-        command:
-          sudo apt-get update
-          sudo apt install python3-pip
-          sudo pip3 install awsebcli --upgrade
+          name: installing AWS CLI
+          command:
+            sudo apt-get update
+            sudo apt install python3-pip
+            sudo pip3 install awsebcli --upgrade
       - run: cd ./app && npm install && npm run build
       - run: aws s3 sync ./app/build s3://chat-lex-react
   workflows:
