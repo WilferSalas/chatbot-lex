@@ -16,4 +16,4 @@ jobs:
     version: 2
     execute_bulk:
       jobs:
-      - build_deploy
+        - build_deploy
