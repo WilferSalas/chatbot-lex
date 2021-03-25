@@ -1,10 +1,19 @@
-orbs:
-  react: thefrontside/react@0.2.0
-version: 2.1
-workflows:
-  push:
+jobs:
+  build_deploy:
+    machine:
+      image: ubuntu-2004:202010-01
+    stepes:
+      - checkout
+      - run:
+        name: installing AWS CLI
+        command:
+          sudo apt-get update
+          sudo apt install python3-pip
+          sudo pip3 install awsebcli --upgrade
+      - run: cd ./app && npm install && npm run build
+      - run: aws s3 sync ./app/build s3://chat-lex-react
+  workflows:
+   version: 2
+   execute_bulk:
     jobs:
-      - react/install
-      - react/eslint:
-          requires:
-            - react/install
+     - build_deploy
