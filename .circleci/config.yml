@@ -25,6 +25,8 @@ jobs:
     working_directory: ~/
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/
       - run:
           name: Build application
           command: npm run build
@@ -32,8 +34,6 @@ jobs:
           root: ~/
           paths:
             - build
-      - attach_workspace:
-          at: ~/
       - store_artifacts:
           path: build
 
