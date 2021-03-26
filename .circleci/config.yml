@@ -18,7 +18,6 @@ jobs:
           root: ~/react-chat
           paths:
             - node_modules
-            - ../.cache/Cypress
 
   build:
     machine:
@@ -46,7 +45,7 @@ jobs:
           at: ~/react-chat
       - run:
           name: Test
-          command: npm runtest
+          command: npm run test
 
   deploy:
     machine:
