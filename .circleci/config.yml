@@ -56,14 +56,15 @@ jobs:
 
 workflows:
   version: 2
-  execute_bulk:
+  deploy:
     jobs:
       - install
       - build:
           requires:
             - install
       - cypress/run:
-          post-steps:
+          start: npm start
+          wait-on: 'http://localhost:3000'
           store_artifacts: true
           requires:
             - build
