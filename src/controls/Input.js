@@ -1,4 +1,4 @@
-// @scripts
+// @packages
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
@@ -23,6 +23,7 @@ const Input = ({
         <Grid container>
             <Grid item xs={10}>
                 <TextField
+                    data-automation="chat-input"
                     fullWidth
                     id="chat-input"
                     label=""
@@ -38,6 +39,7 @@ const Input = ({
             <Grid item xs={2}>
                 <Button
                     className={classes.button}
+                    data-automation="send-message-button"
                     fullWidth
                     variant="contained"
                     color="primary"

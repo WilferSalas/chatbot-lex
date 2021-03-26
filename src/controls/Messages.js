@@ -24,7 +24,7 @@ const Messages = ({ messages, name }) => {
     return (
         <Paper className={classes.paper} elevation={2}>
             <ScrollToBottom className={classes.paper}>
-                <List className={classes.list}>
+                <List data-automation="messages" className={classes.list}>
                     {messages.map((message, index) => (
                         <Message
                             key={index}

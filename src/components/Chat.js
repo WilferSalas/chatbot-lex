@@ -1,4 +1,4 @@
-// @scripts
+// @packages
 import Grid from '@material-ui/core/Grid';
 import React, { useState } from 'react';
 
