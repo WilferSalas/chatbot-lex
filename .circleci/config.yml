@@ -65,7 +65,6 @@ workflows:
       - cypress/run:
           post-steps:
           store_artifacts: true
-          record: true
           requires:
             - build
       - deploy:
