@@ -15,7 +15,7 @@ jobs:
           path: ./node_modules
       - persist_to_workspace:
           root: ~/react-chat
-          path:
+          paths:
             - node_modules
 
   build:
@@ -31,7 +31,7 @@ jobs:
           command: npm build
       - persist_to_workspace:
           root: ~/react-chat
-          path:
+          paths:
             - build
 
   test:
@@ -46,7 +46,7 @@ jobs:
           name: Test
           command: npm test
       - store_artifacts:
-          path:
+          paths:
             - cypress/videos
             - cypress/screenshots
 
