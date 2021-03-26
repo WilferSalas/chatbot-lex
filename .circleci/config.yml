@@ -10,10 +10,8 @@ jobs:
             sudo apt-get update
             sudo apt install python3-pip
             sudo pip3 install awsebcli --upgrade
-      - run: cd ./
-      - run: npm install
-      - run: npm run build
-      - run: aws s3 sync ./build s3://chat-lex-react
+      - run: npm install && npm run build
+      - run: aws s3 sync build s3://chat-lex-react
 
 workflows:
   version: 2
