@@ -2,7 +2,7 @@ jobs:
   install:
     machine:
       image: ubuntu-2004:202010-01
-    working_directory: ~/
+    working_directory: ~/react-chat
     steps:
       - checkout
       - restore_cache:
@@ -15,36 +15,34 @@ jobs:
           paths:
             - ./node_modules
       - persist_to_workspace:
-          root: ~/
+          root: ~/react-chat
           paths:
             - node_modules
 
   build:
     machine:
       image: ubuntu-2004:202010-01
-    working_directory: ~/
+    working_directory: ~/react-chat
     steps:
       - checkout
       - attach_workspace:
-          at: ~/
+          at: ~/react-chat
       - run:
           name: Build application
           command: npm run build
       - persist_to_workspace:
-          root: ~/
+          root: ~/react-chat
           paths:
             - build
-      - store_artifacts:
-          path: build
 
   test:
     machine:
       image: ubuntu-2004:202010-01
-    working_directory: ~/
+    working_directory: ~/react-chat
     steps:
       - checkout
       - attach_workspace:
-          at: ~/
+          at: ~/react-chat
       - run:
           name: Test
           command: npm run test
@@ -55,7 +53,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/
+          at: ~/react-chat
       - run:
           name: Installing AWS CLI
           command: |
