@@ -64,7 +64,7 @@ workflows:
             - install
       - cypress/run:
           post-steps:
-          store-artifacts: true
+          store_artifacts: true
           record: true
           requires:
             - build
