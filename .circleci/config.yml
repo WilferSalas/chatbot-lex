@@ -36,9 +36,6 @@ jobs:
             - build
       - store_artifacts:
           path: build
-      - artifacts:
-          paths:
-            - build
 
   test:
     machine:
