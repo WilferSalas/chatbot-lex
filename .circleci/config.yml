@@ -64,7 +64,7 @@ workflows:
             - install
       - cypress/run:
           start: npm start
-          wait-on: 'http-get://localhost:3000'
+          wait-on: 'http://172.30.0.3:3000'
           store_artifacts: true
           requires:
             - build
