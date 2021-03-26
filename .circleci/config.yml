@@ -12,7 +12,8 @@ jobs:
           command: npm ci
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
-          path: ./node_modules
+          paths:
+            - ./node_modules
       - persist_to_workspace:
           root: ~/react-chat
           paths:
@@ -46,9 +47,9 @@ jobs:
           name: Test
           command: npm test
       - store_artifacts:
-          paths:
-            - cypress/videos
-            - cypress/screenshots
+          path: cypress/videos
+      - store_artifacts:
+          path: cypress/screenshots
 
   deploy:
     machine:
