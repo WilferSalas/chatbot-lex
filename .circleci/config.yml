@@ -15,10 +15,10 @@ jobs:
           paths:
             - ./node_modules
       - persist_to_workspace:
-          root: ~/
+          root: ~/react-chat
           paths:
-            - react-chat/node_modules
-            - .cache/Cypress
+            - node_modules
+            - ../.cache/Cypress
 
   build:
     machine:
