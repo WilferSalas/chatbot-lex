@@ -1,3 +1,7 @@
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1.25.0
+
 jobs:
   install:
     machine:
@@ -18,7 +22,6 @@ jobs:
           root: ~/react-chat
           paths:
             - node_modules
-            - ../.cache/Cypress
 
   build:
     machine:
@@ -35,22 +38,6 @@ jobs:
           root: ~/react-chat
           paths:
             - build
-
-  test:
-    machine:
-      image: ubuntu-2004:202010-01
-    working_directory: ~/react-chat
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/react-chat
-      - run:
-          name: Test
-          command: npm test
-      - store_artifacts:
-          path: cypress/videos
-      - store_artifacts:
-          path: cypress/screenshots
 
   deploy:
     machine:
@@ -75,9 +62,12 @@ workflows:
       - build:
           requires:
             - install
-      - test:
+      - cypress/run:
+          post-steps:
+          store-artifacts: true
+          record: true
           requires:
             - build
       - deploy:
           requires:
-            - test
+            - cypress/run
