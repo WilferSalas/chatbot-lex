@@ -1,5 +1,5 @@
 jobs:
-install:
+  install:
     machine:
       image: ubuntu-2004:202010-01
     working_directory: ~/react-chat
