@@ -76,24 +76,10 @@ workflows:
       - test:
           requires:
             - build
-      - hold: # <<< A job that will require manual approval in the CircleCI web application.
-          type: approval # <<< This key-value pair will set your workflow to a status of "On Hold"
-          requires: # We only run the "hold" job when test2 has succeeded
+      - hold:
+          type: approval
+          requires:
            - test
-      - test_dev:
-          filters:  # using regex filters requires the entire branch to match
-            branches:
-              only:  # only branches matching the below regex filters will run
-                - dev
-                - /user-.*/
-      - test_stage:
-          filters:
-            branches:
-              only: stage
-      - test_pre-prod:
-          filters:
-            branches:
-              only: /pre-prod(?:-.+)?$/
       - deploy:
           requires:
             - hold
