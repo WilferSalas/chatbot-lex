@@ -1,5 +1,58 @@
 jobs:
-  build_deploy:
+install:
+    machine:
+      image: ubuntu-2004:202010-01
+    working_directory: ~/react-chat
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Installing dependencies
+          command: npm ci
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - persist_to_workspace:
+          root: ~/react-chat
+          paths:
+            - node_modules
+            - ../.cache/Cypress
+
+  build:
+    machine:
+      image: ubuntu-2004:202010-01
+    working_directory: ~/react-chat
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/react-chat
+      - run:
+          name: Build application
+          command: npm run build
+      - persist_to_workspace:
+          root: ~/react-chat
+          paths:
+            - build
+
+  test:
+    machine:
+      image: ubuntu-2004:202010-01
+    working_directory: ~/react-chat
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/react-chat
+      - run:
+          name: Test
+          command: npm test
+      - store_artifacts:
+          path: cypress/videos
+      - store_artifacts:
+          path: cypress/screenshots
+
+  deploy:
     machine:
       image: ubuntu-2004:202010-01
     steps:
@@ -17,4 +70,13 @@ workflows:
   version: 2
   execute_bulk:
     jobs:
-      - build_deploy
+      - install
+      - build:
+          requires:
+            - install
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test
