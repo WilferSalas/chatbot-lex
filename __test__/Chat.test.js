@@ -11,3 +11,8 @@ test('<Chat /> Render without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<Chat />, div);
 });
+
+test('<Chat /> Render title correctly', () => {
+  // const div = document.createElement('div');
+  // ReactDOM.render(<Chat />, div);
+});

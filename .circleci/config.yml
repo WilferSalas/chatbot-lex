@@ -51,6 +51,16 @@ jobs:
       - store_artifacts:
           path: cypress/screenshots
 
+  release-branch-workflow:
+    - build
+    - request-testing:
+        type: approval
+        requires:
+          - build
+    - deploy-aws:
+        requires:
+          - request-testing
+
   deploy:
     machine:
       image: ubuntu-2004:202010-01
@@ -76,6 +86,7 @@ workflows:
       - test:
           requires:
             - build
+      - release-branch-workflow
       - deploy:
           requires:
             - test
